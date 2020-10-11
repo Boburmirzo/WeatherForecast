@@ -105,117 +105,171 @@ A version of JDK 8 should be installed in order to run the application.
          },
          "dailyTemperatures": [
            {
+             "from": "2020-10-11T12:00:00",
+             "to": "2020-10-11T15:00:00",
              "unit": "celsius",
-             "value": 13.47
+             "value": 13.8
            },
            {
+             "from": "2020-10-11T15:00:00",
+             "to": "2020-10-11T18:00:00",
              "unit": "celsius",
-             "value": 12.25
+             "value": 12.39
            },
            {
+             "from": "2020-10-11T18:00:00",
+             "to": "2020-10-11T21:00:00",
              "unit": "celsius",
-             "value": 10.88
+             "value": 10.92
            },
            {
+             "from": "2020-10-12T06:00:00",
+             "to": "2020-10-12T09:00:00",
              "unit": "celsius",
              "value": 10.58
            },
            {
+             "from": "2020-10-12T09:00:00",
+             "to": "2020-10-12T12:00:00",
              "unit": "celsius",
              "value": 13.25
            },
            {
+             "from": "2020-10-12T12:00:00",
+             "to": "2020-10-12T15:00:00",
              "unit": "celsius",
              "value": 13.15
            },
            {
+             "from": "2020-10-12T15:00:00",
+             "to": "2020-10-12T18:00:00",
              "unit": "celsius",
              "value": 11.39
            },
            {
+             "from": "2020-10-12T18:00:00",
+             "to": "2020-10-12T21:00:00",
              "unit": "celsius",
              "value": 11.55
            },
            {
+             "from": "2020-10-12T21:00:00",
+             "to": "2020-10-13T00:00:00",
              "unit": "celsius",
              "value": 11.28
            },
            {
+             "from": "2020-10-13T00:00:00",
+             "to": "2020-10-13T03:00:00",
              "unit": "celsius",
              "value": 10.35
            },
            {
+             "from": "2020-10-13T12:00:00",
+             "to": "2020-10-13T15:00:00",
              "unit": "celsius",
              "value": 10.23
            },
            {
+             "from": "2020-10-13T18:00:00",
+             "to": "2020-10-13T21:00:00",
              "unit": "celsius",
              "value": 11.22
            },
            {
+             "from": "2020-10-13T21:00:00",
+             "to": "2020-10-14T00:00:00",
              "unit": "celsius",
              "value": 10.99
            },
            {
+             "from": "2020-10-14T00:00:00",
+             "to": "2020-10-14T03:00:00",
              "unit": "celsius",
              "value": 10.48
            },
            {
+             "from": "2020-10-14T03:00:00",
+             "to": "2020-10-14T06:00:00",
              "unit": "celsius",
              "value": 10.05
            },
            {
+             "from": "2020-10-14T06:00:00",
+             "to": "2020-10-14T09:00:00",
              "unit": "celsius",
              "value": 11.37
            },
            {
+             "from": "2020-10-14T09:00:00",
+             "to": "2020-10-14T12:00:00",
              "unit": "celsius",
              "value": 14.17
            },
            {
+             "from": "2020-10-14T12:00:00",
+             "to": "2020-10-14T15:00:00",
              "unit": "celsius",
              "value": 14.09
            },
            {
+             "from": "2020-10-14T15:00:00",
+             "to": "2020-10-14T18:00:00",
              "unit": "celsius",
              "value": 11.81
            },
            {
+             "from": "2020-10-14T18:00:00",
+             "to": "2020-10-14T21:00:00",
              "unit": "celsius",
              "value": 11.42
            },
            {
+             "from": "2020-10-14T21:00:00",
+             "to": "2020-10-15T00:00:00",
              "unit": "celsius",
              "value": 11.3
            },
            {
+             "from": "2020-10-15T00:00:00",
+             "to": "2020-10-15T03:00:00",
              "unit": "celsius",
              "value": 10.47
            },
            {
+             "from": "2020-10-15T03:00:00",
+             "to": "2020-10-15T06:00:00",
              "unit": "celsius",
              "value": 10.33
            },
            {
+             "from": "2020-10-15T06:00:00",
+             "to": "2020-10-15T09:00:00",
              "unit": "celsius",
              "value": 10.99
            },
            {
+             "from": "2020-10-15T09:00:00",
+             "to": "2020-10-15T12:00:00",
              "unit": "celsius",
              "value": 12.41
            },
            {
+             "from": "2020-10-15T12:00:00",
+             "to": "2020-10-15T15:00:00",
              "unit": "celsius",
              "value": 12.1
            },
            {
+             "from": "2020-10-15T15:00:00",
+             "to": "2020-10-15T18:00:00",
              "unit": "celsius",
              "value": 10.89
            }
          ]
        }
      }
-
+     
       And you should pass in the header, the previous generated token:
 
       `authorizationToken=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3ZWF0aGVyU3ViamVjdCIsImV4cCI6MTUzOTU2NzI0OX0.J3Xli1EV-T_cP-nQ_uJbkYGcYJdGINSvlmrwC6cSiHY`

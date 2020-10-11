@@ -85,6 +85,10 @@ public class OpenWeatherSourceProviderImplTest {
         //given conditions
         City city = new City();
         city.setId(3647637L);
+        city.setName("Test");
+        city.setLimitDay(10);
+        city.setLimitTemperature(10.0);
+
         WeatherData weatherData = new WeatherData();
         WeatherData.Forecast forecast = new WeatherData.Forecast();
         weatherData.setForecast(forecast);

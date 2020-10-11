@@ -1,0 +1,12 @@
+*.iml
+*.ipr
+*.iws
+.idea
+.gradle
+build
+out
+classes
+*portability.log*
+*portability-error.log*
+server/*portability.log*
+server/*portability-error.log*

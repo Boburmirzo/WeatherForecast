@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.cloudator.restapp.forecastweather.controller.ForecastWeatherControllerTest
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 21.742 s - in com.cloudator.restapp.forecastweather.controller.ForecastWeatherControllerTest

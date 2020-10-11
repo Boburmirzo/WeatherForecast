@@ -1,0 +1,5 @@
+com/cloudator/restapp/forecastweather/service/OpenWeatherSourceProviderImplTest.class
+com/cloudator/restapp/forecastweather/controller/ForecastWeatherControllerTest.class
+com/cloudator/restapp/forecastweather/service/ForecastWeatherServiceImplTest.class
+com/cloudator/restapp/forecastweather/service/ForecastWeatherServiceImplTest$1.class
+com/cloudator/restapp/forecastweather/ForecastWeatherApplicationTests.class

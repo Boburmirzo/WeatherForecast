@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <property name="logPath" value="./logs/"/>
+    <property name="logFileName" value="weatherLogging"/>
+    <property name="logFileNameExt" value=".log"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+
+    <appender name="ROLLING-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- Name of the file where the log messages are written -->
+
+        <file>${logPath}${logFileName}${logFileNameExt}</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${logPath}${logFileName}.%d{yyyy-MM-dd}.%i${logFileNameExt}</fileNamePattern>
+
+            <!-- each file should be at most 10MB, keep 30 days worth of history, but at most 10GB -->
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+
+    <!-- #############################
+        ### Spring ORM logging ###
+        ############################# -->
+    <logger name="org.springframework.orm" level="debug"/>
+
+    <!-- #############################
+         ### Spring HIBERNATE ###
+         ############################# -->
+    <logger name="org.springframework.orm.hibernate" level="warn"/>
+
+    <!-- #############################
+         ### Spring JPA ###
+         ############################# -->
+    <logger name="org.springframework.orm.jpa" level="warn"/>
+
+    <!-- #############################
+         ### All Hibernate ###
+         ############################# -->
+    <logger name="org.hibernate" level="info"/>
+
+    <!-- #############################
+         ### SQL Fragmnts & Stmnts ###
+         ############################# -->
+    <logger name="org.hibernate.sql" level="trace"/>
+
+    <!-- #############################
+         ### Map Java-JDBC types ###
+         ############################# -->
+    <logger name="org.hibernate.type" level="warn"/>
+
+    <!-- #############################
+         ### Schema Gen and DDL ###
+         ############################# -->
+    <logger name="org.hibernate.tool.hbm2ddl" level="warn"/>
+
+    <!-- #############################
+         ### 2nd Lvl Query Caching ###
+         ############################# -->
+    <logger name="org.hibernate.cache" level="warn"/>
+
+    <logger name="com.cloudator.restapp.forecastweather.controller" level="debug"/>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="ROLLING-FILE"/>
+    </root>
+
+</configuration>

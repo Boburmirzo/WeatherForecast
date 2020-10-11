@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: com.cloudator.restapp.forecastweather.service.ForecastWeatherServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.083 s <<< FAILURE! - in com.cloudator.restapp.forecastweather.service.ForecastWeatherServiceImplTest
+testGetForecastWeatherMetrics(com.cloudator.restapp.forecastweather.service.ForecastWeatherServiceImplTest)  Time elapsed: 0.008 s  <<< ERROR!
+com.cloudator.restapp.forecastweather.service.exception.BusinessException: Exception encountered invoking getForecastWeatherMetrics with param=City{id=3647637, name='null', isoCountryCode='null', sourceProviderKey='openweathermap.sourceProviderKey'}; nested exception is java.lang.NullPointerException
+	at com.cloudator.restapp.forecastweather.service.ForecastWeatherServiceImplTest.testGetForecastWeatherMetrics(ForecastWeatherServiceImplTest.java:55)
+Caused by: java.lang.NullPointerException
+	at com.cloudator.restapp.forecastweather.service.ForecastWeatherServiceImplTest.testGetForecastWeatherMetrics(ForecastWeatherServiceImplTest.java:55)
+

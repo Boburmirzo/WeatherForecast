@@ -64,20 +64,21 @@ public class ForecastWeatherController extends BaseController {
 
 
     /**
-     * Generates the token for the given user
+     * Get forecast weather info for given city
      *
      * @param serviceRequest An instance of ServiceRequest<City> containing a City instance
-     * @return a ServiceResponse<String>> containing the generated token
+     * @return a ServiceResponse<ForecastWeatherMetrics>> containing the temperature data
      */
     @PostMapping("/data")
     // Token required annotation is disabled for just easily check functionality,
     // if you enable it, token is required to access to the endpoint
     // @TokenRequired
     @ApiOperation(value = "Gets the ForecastWeatherMetrics", httpMethod = "POST")
-    public ServiceResponse<ForecastWeatherMetrics> getForecastWeatherMetric(@RequestBody ServiceRequest<City> serviceRequest) {
+    public ServiceResponse<ForecastWeatherMetrics> getForecastWeatherMetricForTheCity(@RequestBody ServiceRequest<City> serviceRequest) {
         ServiceResponse<ForecastWeatherMetrics> serviceResponse = new ServiceResponse<>();
         try {
             checkCityParameter(serviceRequest);
+
             ForecastWeatherMetrics forecastWeatherMetric = forecastWeatherService.getForecastWeatherMetrics(serviceRequest.getParameter());
             serviceResponse.setCode(forecastWeatherMetric.isValid() ? ResponseCodeEnum.SUCCESS : ResponseCodeEnum.UNSUCCESS);
             serviceResponse.setResult(forecastWeatherMetric);

@@ -67,7 +67,7 @@ A version of JDK 8 should be installed in order to run the application.
 
    You should copy all the result value (this is the generated token) in order to invoke other endpoints.
 
-2. After generating the token, you can invoke the statistics by invoking:
+2. You can invoke the statistics by invoking:
 
    `http://localhost:8080/weather/data`
 
@@ -79,8 +79,8 @@ A version of JDK 8 should be installed in order to run the application.
          "id": 0 - Id of city if it is known - optional
          "isoCountryCode": "string" - Country iso code - optional
          "limitDay": 0 - limit number of days - optional by default 5 days
-         "limitTemperature": 0 - limit temperature - mandatory
-         "name": "string" - name of city - mandatory
+         "limitTemperature": 0 - limit temperature
+         "name": "string" - name of city - optional
    
    Request:
     {

@@ -1,5 +1,6 @@
 package com.cloudator.restapp.forecastweather.service;
 
+import com.cloudator.restapp.forecastweather.model.City;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -37,5 +38,9 @@ public abstract class AbstractSourceProvider implements SourceProvider {
 
     protected Double getDefaultLimitTemperature(Double limitTemperature) {
         return limitTemperature != null ? limitTemperature : defaultLimitTemperature;
+    }
+
+    protected boolean isSpecificLocation(City city) {
+        return city.getId() != null || city.getName() != null || city.getIsoCountryCode() != null;
     }
 }

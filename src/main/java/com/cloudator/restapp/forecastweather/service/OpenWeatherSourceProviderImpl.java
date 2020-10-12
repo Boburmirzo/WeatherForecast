@@ -50,7 +50,13 @@ public class OpenWeatherSourceProviderImpl extends AbstractSourceProvider {
     public ForecastWeatherMetrics getForecastWeatherMetrics(City city) {
         try {
 
-            WeatherData weatherData = getWeatherDataByCity(city);
+            WeatherData weatherData = null;
+
+            if (isSpecificLocation(city)) {
+                weatherData = getWeatherDataByCity(city);
+            } else {
+                weatherData = getWeatherDataForAllLocation();
+            }
 
             ForecastWeatherMetrics forecastWeatherMetrics = new ForecastWeatherMetrics(city);
             //Circuit breaker
@@ -99,6 +105,11 @@ public class OpenWeatherSourceProviderImpl extends AbstractSourceProvider {
         } else {
             return getForecastWeatherMetricsByCityId(getForecastWeatherMetricsByCityName(city));
         }
+    }
+
+    //TODO: Needs to be implemented for all locations
+    private WeatherData getWeatherDataForAllLocation() {
+        return new WeatherData();
     }
 
     /**

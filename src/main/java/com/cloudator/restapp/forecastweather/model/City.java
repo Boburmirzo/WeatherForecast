@@ -16,18 +16,34 @@ public class City implements Serializable {
 
     private static final long serialVersionUID = 8483342465956521524L;
 
+    /**
+     * City ID if it is known
+     */
     private Long id;
 
-    @NotNull
+    /**
+     * City name like "London", "Berlin"
+     */
     private String name;
 
+    /**
+     * Country Iso code to search for forecast
+     */
     private String isoCountryCode;
 
-    @NotNull
+    /**
+     * Temperature limit as an input
+     */
     private Double limitTemperature;
 
+    /**
+     * Limit day to get data for specific days, by default it is 5 days
+     */
     private Integer limitDay;
 
+    /**
+     * Forecast data provider can be set in the request, by default it is https://openweathermap.org/api
+     */
     private String sourceProviderKey;
 
     public City() {

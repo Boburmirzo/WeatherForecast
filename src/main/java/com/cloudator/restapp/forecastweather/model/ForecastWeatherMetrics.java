@@ -15,12 +15,15 @@ public class ForecastWeatherMetrics implements Serializable, Integrity {
     /**
      * City for which temperature we are checking
      */
-    private final City city;
+    private City city;
 
     /**
      * List of temperatures which exceeds limit
      */
     private List<Magnitude> dailyTemperatures;
+
+    public ForecastWeatherMetrics() {
+    }
 
     public ForecastWeatherMetrics(City city) {
         this.city = city;

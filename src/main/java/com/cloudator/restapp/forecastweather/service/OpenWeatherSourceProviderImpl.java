@@ -11,6 +11,7 @@ import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -47,16 +48,11 @@ public class OpenWeatherSourceProviderImpl extends AbstractSourceProvider {
      * @return a ForecastWeatherMetrics instance
      */
     @Override
+    @Cacheable(value = "cityCache", key = "#city")
     public ForecastWeatherMetrics getForecastWeatherMetrics(City city) {
         try {
 
-            WeatherData weatherData = null;
-
-            if (isSpecificLocation(city)) {
-                weatherData = getWeatherDataByCity(city);
-            } else {
-                weatherData = getWeatherDataForAllLocation();
-            }
+            WeatherData weatherData = getForecastWeatherMetricsByCityId(city);
 
             ForecastWeatherMetrics forecastWeatherMetrics = new ForecastWeatherMetrics(city);
             //Circuit breaker
@@ -68,9 +64,9 @@ public class OpenWeatherSourceProviderImpl extends AbstractSourceProvider {
 
             Predicate<WeatherData.Forecast.Time> limitDaysPredicate = time -> (time.getFrom().toLocalDate().isBefore(nowPlusNDays));
 
-            Double limitTemperature = getDefaultLimitTemperature(city.getLimitTemperature());
+            Integer limitTemperature = getDefaultLimitTemperature(city.getLimitTemperature());
 
-            Predicate<WeatherData.Forecast.Time> limitTemperaturePredicate = temperature -> (temperature.getTemperature().getValue().doubleValue() >= limitTemperature);
+            Predicate<WeatherData.Forecast.Time> limitTemperaturePredicate = temperature -> (temperature.getTemperature().getValue().intValue() >= limitTemperature);
 
             logger.info("ForecastWeatherServiceImpl.day");
             List<Magnitude> dailyTemperatureMagnitudes = getDailyTemperatureList(weatherData, limitDaysPredicate, limitTemperaturePredicate);
@@ -99,29 +95,6 @@ public class OpenWeatherSourceProviderImpl extends AbstractSourceProvider {
                 .collect(Collectors.toList());
     }
 
-    private WeatherData getWeatherDataByCity(City city) {
-        if (city.getId() != null) {
-            return getForecastWeatherMetricsByCityId(city);
-        } else {
-            return getForecastWeatherMetricsByCityId(getForecastWeatherMetricsByCityName(city));
-        }
-    }
-
-    //TODO: Needs to be implemented for all locations
-    private WeatherData getWeatherDataForAllLocation() {
-        return new WeatherData();
-    }
-
-    /**
-     * Retrieves the city from the cached repository
-     *
-     * @param city a City instance containing name and isoCountryCode
-     * @return a City instance
-     */
-    private City getForecastWeatherMetricsByCityName(City city) {
-        return forecastWeatherDao.findCityByNameAndCountryCode(city);
-    }
-
     /**
      * Gets the WeatherData from the external weather provider.
      * This functionality implements the Circuit Breaker pattern to avoid affecting the client
@@ -139,7 +112,6 @@ public class OpenWeatherSourceProviderImpl extends AbstractSourceProvider {
             throw new IntegrationException("Exception encountered invoking getForecastWeatherMetricsByCityName with param=" + city, e);
         }
     }
-
 
     /**
      * This is default WeatherData instance used in case of connection failure with the weather API provider

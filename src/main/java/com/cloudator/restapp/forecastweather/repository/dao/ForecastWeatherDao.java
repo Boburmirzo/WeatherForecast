@@ -1,6 +1,6 @@
 package com.cloudator.restapp.forecastweather.repository.dao;
 
-import com.cloudator.restapp.forecastweather.model.City;
+import com.cloudator.restapp.forecastweather.model.ForecastWeatherMetrics;
 import com.cloudator.restapp.forecastweather.service.exception.IntegrationException;
 
 import java.util.List;
@@ -11,28 +11,26 @@ import java.util.List;
 public interface ForecastWeatherDao {
 
     /**
-     * Retrieves all the cities from the underlying repository
+     * Retrieves all weather metrics for a city from memory
      *
-     * @return a List of Cities instance
+     * @return forecast weather metrics for a given city
      * @throws IntegrationException if any exception is found, with a message containing contextual information of the error and the root exception
      */
-    List<City> findAllCities() throws IntegrationException;
+    ForecastWeatherMetrics findByCiyId(Long cityId) throws IntegrationException;
 
     /**
-     * Retrieves a city by id
+     * Save all forecast weather metrics
      *
-     * @param id The cityId
-     * @return an instance of City
+     * @param forecastWeatherMetrics forecast weather metrics
      * @throws IntegrationException if any exception is found, with a message containing contextual information of the error and the root exception
      */
-    City findCityById(Long id) throws IntegrationException;
+    void saveAllForecastWeatherMetrics(List<ForecastWeatherMetrics> forecastWeatherMetrics) throws IntegrationException;
 
     /**
-     * Retrieves a city by city name and country ISO code
+     * Get forecast weather metrics for all cities
      *
-     * @param city A city containing the name and the country ISO code
-     * @return @return an instance of City
      * @throws IntegrationException if any exception is found, with a message containing contextual information of the error and the root exception
      */
-    City findCityByNameAndCountryCode(City city) throws IntegrationException;
+    List<ForecastWeatherMetrics> findAllForecastWeatherMetricsForAllCities(List<Long> cityIds) throws IntegrationException;
+
 }

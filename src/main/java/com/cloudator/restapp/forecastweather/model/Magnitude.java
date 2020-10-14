@@ -13,12 +13,14 @@ public final class Magnitude implements Serializable {
     private static final long serialVersionUID = -571080056907945480L;
 
     private LocalDateTime from;
-
     private LocalDateTime to;
 
-    private final String unit;
+    private String unit;
 
-    private final double value;
+    private double value;
+
+    public Magnitude() {
+    }
 
     public Magnitude(LocalDateTime from,
                      LocalDateTime to,

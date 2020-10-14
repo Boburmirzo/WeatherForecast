@@ -1,6 +1,8 @@
 package com.cloudator.restapp.forecastweather;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import io.swagger.annotations.Api;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +11,10 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
@@ -29,6 +34,7 @@ import java.util.Arrays;
 @EnableSwagger2
 @EnableCaching
 @EnableCircuitBreaker
+@EnableScheduling
 public class ForecastWeatherApplication {
 
     /**
@@ -63,7 +69,9 @@ public class ForecastWeatherApplication {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                .apis(RequestHandlerSelectors.basePackage("com.cloudator.restapp.forecastweather.controller")).paths(PathSelectors.ant("/weather/*"))
+                .apis(RequestHandlerSelectors.basePackage("com.cloudator.restapp.forecastweather.controller"))
+                .paths(PathSelectors.ant("/weather/**")
+                )
                 .paths(PathSelectors.any())
                 .build()
                 .apiInfo(apiInfo())
@@ -108,5 +116,13 @@ public class ForecastWeatherApplication {
         result.setName("shallowEtagHeaderFilter");
         result.setOrder(1);
         return result;
+    }
+
+    @Bean
+    @Primary
+    public ObjectMapper objectMapper(Jackson2ObjectMapperBuilder builder) {
+        ObjectMapper objectMapper = builder.build();
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+        return objectMapper;
     }
 }

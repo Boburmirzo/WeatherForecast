@@ -34,7 +34,7 @@ public class City implements Serializable {
     /**
      * Temperature limit as an input
      */
-    private Double limitTemperature;
+    private Integer limitTemperature;
 
     /**
      * Limit day to get data for specific days, by default it is 5 days
@@ -83,11 +83,11 @@ public class City implements Serializable {
         this.isoCountryCode = isoCountryCode;
     }
 
-    public Double getLimitTemperature() {
+    public Integer getLimitTemperature() {
         return limitTemperature;
     }
 
-    public void setLimitTemperature(Double limitTemperature) {
+    public void setLimitTemperature(Integer limitTemperature) {
         this.limitTemperature = limitTemperature;
     }
 

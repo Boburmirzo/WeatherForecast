@@ -31,47 +31,32 @@ by using these parameters look for the cityId (Redis cached info), and then the 
 ## Getting Started
 
 1. Do mvn clean install
-2. Run ForecastWeatherApplication Spring boot application
+2. Make sure that Redis is up, please take a look to Prerequisites
+3. Run ForecastWeatherApplication Spring boot application
 
 After this the Forecast Weather API will start on  http://localhost:8080.
 
 ### Prerequisites
 
-A version of JDK 8 should be installed in order to run the application.
+1. A version of JDK 8 should be installed in order to run the application.
+   Application uses Redis as a memory so, it should be installed and running.
 
+2. You can run docker image simply by running below command:
+   docker run -p 16379:6379 -d redis:6.0 redis-server --requirepass "mypass"
 
 ### Running the web services
 
-1. To get access to the API, you should get a token in the following endpoint:
+There are two main Rest endpoints:
 
-   http://localhost:8080/weather/generateToken
+1. /weather/data - GET: Retrieves all weather metrics for given cities in json file if they are more than limit temperature
+2. /weather/data/city - POST: Retrieves and filters weather metrics by given city name 
 
-   Passing as parameter:
-   {
-    "parameter":"weatherSubject"
-   }
+- GET: `http://localhost:8080/weather/data`
 
-   and using BASIC auth with the following credentials:
-
-        username=user
-        password=cloudator@2020
+- POST: `http://localhost:8080/weather/data/city`
 
 
-   After invoking these endpoint you will get something like this:
-
-   {
-       "code": "SUCCESS",
-       "result": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE2MDI0MTM4Mzd9.7tSRbmvbRoQ2IY539pHqx__0nO9d4Bf-3fkga-862_c"
-   }
-
-
-   You should copy all the result value (this is the generated token) in order to invoke other endpoints.
-
-2. You can invoke the statistics by invoking:
-
-   `http://localhost:8080/weather/data`
-
-    Passing as parameter, one of the following JSON payloads:
+You can invoke the statistics by invoking and passing as parameter, one of the following JSON payloads:
 
 
    Endpoint can receive as a parameter following:
@@ -82,19 +67,14 @@ A version of JDK 8 should be installed in order to run the application.
          "limitTemperature": 0 - limit temperature
          "name": "string" - name of city - optional
    
-   Request:
+  - Request example:
     {
       "parameter": {
-        "limitTemperature": 10,
         "name": "London"
       }
     }
     
-    and using BASIC auth with the following credentials:
-
-       username=user
-       password=cloudator@2020
-   Response:
+  - Response:
      {
        "code": "SUCCESS",
        "result": {
@@ -269,13 +249,35 @@ A version of JDK 8 should be installed in order to run the application.
          ]
        }
      }
-     
-      And you should pass in the header, the previous generated token:
+ 
+## Additional functionality 
+   You can also enable authorisation by JWT token for the endpoints
+        
+   To get access to the API, you should get a token in the following endpoint:
+   
+      http://localhost:8080/weather/generateToken
+   
+      Passing as parameter:
+      {
+       "parameter":"weatherSubject"
+      }
+   
+      and using BASIC auth with the following credentials:
+   
+           username=user
+           password=cloudator@2020
+   
+   
+      After invoking these endpoint you will get something like this:
+   
+      {
+          "code": "SUCCESS",
+          "result": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzdHJpbmciLCJleHAiOjE2MDI0MTM4Mzd9.7tSRbmvbRoQ2IY539pHqx__0nO9d4Bf-3fkga-862_c"
+      }
+   
+   
+      You should copy all the result value (this is the generated token) in order to invoke other endpoints.
 
-      `authorizationToken=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ3ZWF0aGVyU3ViamVjdCIsImV4cCI6MTUzOTU2NzI0OX0.J3Xli1EV-T_cP-nQ_uJbkYGcYJdGINSvlmrwC6cSiHY`
-
-    Note: the supported sourceProviderKey are `mocky.sourceProviderKey` and `openweathermap.sourceProviderKey`. If this param is not provided, openweathermap.org will be used as default provider.
-    Also, for now Token based check is disabled for checking purposes.
 ## More info
 
 You can run check all the functionalities exposed by the API in: `http://localhost:8080/swagger-ui.html`
